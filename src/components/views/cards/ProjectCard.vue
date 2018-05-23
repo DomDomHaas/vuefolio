@@ -5,60 +5,55 @@
     hover
     dark
     @click.native="cardClick"
+    style="background-color:rgba(0, 0, 0, 0);"
     >
-
-    <v-card-actions class="pa-0" style="height: 0px">
-    </v-card-actions>
 
     <v-card-media
       class="imagezoom"
-      height="350px"
-      v-bind:style="'background-image: url(' + this.nosiyImg + ') !important;'"
+      height="250px"
+      v-bind:style="'background-image: url(' + this.noisyImg + ') !important; left: 16px;'"
       >      
-      <v-container fill-height full-width grid-list-xs fluid>
-        <v-layout row justify-end>
-          <v-flex xs2 >
-          <v-btn icon @click.native="show = !show">
-            <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
-          </v-btn>
+      <v-container fill-height grid-list-xs>
+        <v-layout row wrap>
+          <v-flex offset-xs10 xs2 >
+            <v-btn icon @click.native="show = !show">
+              <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+            </v-btn>
           </v-flex>
-        </v-layout>
-      </v-container>
 
       <!--img :src="noisyImg" /-->
 
-      <v-container v-if="tags">
-        <v-layout row>
-          <v-flex v-for="tag in tags" :key="tag.id">
-            <tag-chip :id="tag.id"
-                      :name="tag.name"
-                      :closeable="tag.closeable" />
-          </v-flex>
+          <v-layout row wrap>
+            <v-flex xs4 v-for="tag in tags.slice(0,3)" :key="tag.id">
+              <tag-chip :id="tag.id"
+                        :name="tag.name"
+                        :closeable="tag.closeable" />
+            </v-flex>
 
-          <v-flex v-if="maxTagsReached">
-            <tag-chip :name="'...'" />
-          </v-flex>
-          
+            <v-flex xs2 v-if="maxTagsReached">
+              <tag-chip :name="'...'" />
+              </v-flex>
+            
+          </v-layout>
         </v-layout>
       </v-container>
 
     </v-card-media>
 
-    <v-card-title primary-title>
+    <!--v-card-title class="amber darken-4" >
       <div>
         <h3 class="headline mb-0">{{ title }}</h3>
-        <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+        <div>{{ subtitle }}</div>
       </div>
-    </v-card-title>
+    </v-card-title-->
 
-    
-    <v-slide-y-transition>
-      <v-card-text v-show="show">
-        I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-      </v-card-text>
-    </v-slide-y-transition>
+    <div class="card__title amber darken-4 ribbon_back" style="width: 256px">
+      <h3 class="headline mb-0">{{ title }}</h3>
+      <div>{{ subtitle }}</div>
+    </div>
 
   </v-card>
+
 
 </template>
 
@@ -86,17 +81,14 @@ export default {
   props: {
     title: String,
     year: String,
-    tags:[{
-      id: String,
-      name: String,
-    }],
+    tags:Array, 
   },
   components: {
     TagChip,
   },
   methods: {
     cardClick: function cardClick() {
-      this.$emit('clickedEvent', this.datasetname);
+      this.$emit('cardClick', this);
     },
   },
   computed:{
@@ -107,7 +99,7 @@ export default {
   data: () => ({
     show: false,
     showDataText: 'SHOW DATA',
-    noisyImg,
+    noisyImg: noisyImg,
   }),
 };
 </script>
@@ -123,4 +115,33 @@ export default {
   .imagezoom img:focus {
     transform: scale(1.2);
   }
+
+  .ribbon_back .headline::before {
+    border-top-color: transparent !important;
+    border-right-color: #B71C1C !important;
+    border-bottom-color: #B71C1C !important;
+    border-left-color: transparent !important;
+  }
+
+  .ribbon_back .headline::before{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: -16px;
+    width: 0;
+    border: 8px solid;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+
+  .ribbon_back .headline::before{
+    top: auto;
+    bottom: 64px;
+  }
+
+
+
 </style>

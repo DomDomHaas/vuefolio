@@ -1,10 +1,13 @@
 <template>
-  <v-container>
+  <v-container fluid grid-list-xs>
 
-    <v-layout>
-      <v-flex xs4 v-for="project in projects" :key="project.title">
-        <project-card :title="project.title"
-        :year="project.year" />
+    <v-layout row wrap>
+      <v-flex px-3 py-2 xs12 sm3 v-for="project in projects" :key="project.title">
+        <project-card
+                      :title="project.title"
+                      :year="project.year"
+                      :tags="project.tags"
+                      :cardClick="cardClicked"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -14,10 +17,18 @@
 import ProjectCard from './views/cards/ProjectCard';
 
 export default {
-  name: 'HelloWorld',
+  methods: {
+    cardClicked: function cardClicked(project) {
+      alert('clicked ' + project.title);
+    },
+  },
   data: () => ({
     projects:[
-      {title: 'Portfolio Redesign', tags: [{id: 0, name: 'design'}, {id: 1, name: 'programming'}], year: '2018'},
+      {title: 'project 12', tags: [{id: '0', name: 'design'}, {id: '1', name: 'programming'}], year: '2018'},
+      {title: 'project 2', tags: [{id: '0', name: 'design'}, ], year: '2018'},
+      {title: 'project 3', tags: [{id: '1', name: 'programming'}], year: '2018'},
+      {title: 'project 41', tags: [{id: '0', name: 'design'}, {id: '1', name: 'programming'}, {id: '2', name: 'drawing'}, {id: '2', name: 'animation'}], year: '2018'},
+      {title: 'project 34535', tags: [{id: '0', name: 'design'}, {id: '1', name: 'programming'}], year: '2018'},
     ],
   }),
   components: {
