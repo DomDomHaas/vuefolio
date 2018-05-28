@@ -13,10 +13,10 @@
       height="250px"
       v-bind:style="'background-image: url(' + this.noisyImg + ') !important; left: 16px;'"
       >      
-      <v-container fill-height grid-list-xs>
+      <v-container fill-height>
         <v-layout row wrap>
-          <v-flex offset-xs10 xs2 >
-            <v-btn icon @click.native="show = !show">
+          <v-flex offset-xs10 xs2 offset-sm9 sm2 >
+            <v-btn icon v-on:click.stop="show = !show">
               <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
             </v-btn>
           </v-flex>
@@ -40,14 +40,7 @@
 
     </v-card-media>
 
-    <!--v-card-title class="amber darken-4" >
-      <div>
-        <h3 class="headline mb-0">{{ title }}</h3>
-        <div>{{ subtitle }}</div>
-      </div>
-    </v-card-title-->
-
-    <div class="card__title amber darken-4 ribbon_back" style="width: 256px">
+    <div class="card__title amber darken-4 ribbon_back" style="width: 105.25%; position: relative; left: -5.25%">
       <h3 class="headline mb-0">{{ title }}</h3>
       <div>{{ subtitle }}</div>
     </div>
@@ -79,16 +72,18 @@ import TagChip from './TagChip';
 
 export default {
   props: {
+    id: String,
     title: String,
+    subtitle: String,
     year: String,
-    tags:Array, 
+    tags: Array, 
   },
   components: {
     TagChip,
   },
   methods: {
     cardClick: function cardClick() {
-      this.$emit('cardClick', this);
+      this.$emit('cardClick', this.id);
     },
   },
   computed:{
