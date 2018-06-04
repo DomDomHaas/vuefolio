@@ -19,6 +19,20 @@
 import ProjectCard from './views/cards/ProjectCard';
 
 export default {
+  /*
+  props:{
+    projects: Array,
+  },
+  */
+  data: () => ({
+    projects: [
+      { id: '0', title: 'project 12', subtitle: 'a project', tags: [{ id: '0', name: 'design' }, { id: '1', name: 'programming' }], year: '2018' },
+      { id: '1', title: 'project 2', subtitle: 'a project', tags: [{ id: '0', name: 'design' }], year: '2018' },
+      { id: '2', title: 'project 3', subtitle: 'a project', tags: [{ id: '1', name: 'programming' }], year: '2018' },
+      { id: '3', title: 'project 41', subtitle: 'a project', tags: [{ id: '0', name: 'design' }, { id: '1', name: 'programming' }, { id: '2', name: 'drawing' }, { id: '2', name: 'animation' }], year: '2018' },
+      { id: '4', title: 'project 34535', subtitle: 'a project', tags: [{ id: '0', name: 'design' }, { id: '1', name: 'programming' }], year: '2018' },
+    ],
+  }),
   methods: {
     cardClicked: function cardClicked(projectid) {
       this.$router.push('/project/' + projectid);
